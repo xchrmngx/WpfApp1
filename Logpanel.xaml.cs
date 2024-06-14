@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,8 +27,11 @@ namespace WpfApp1
         }
         trenyaEntities5 db = new trenyaEntities5();
         List<users> regusers = new List<users>();
+
+        
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            
             var user = db.users.FirstOrDefault(x => x.login == textbox1.Text && x.password == textbox2.Text);
 
             if (user == null) 
@@ -60,23 +64,39 @@ namespace WpfApp1
 
         private void button_reg_Click(object sender, RoutedEventArgs e)
         {
-            int a = Convert.ToInt32(type_box.Text);
-            var user = db.users.FirstOrDefault(x => x.login == login_box.Text && x.password == pass_box.Text && x.FIO == fio_box.Text && x.type == a);
-            if (login_box.Text != "" && pass_box.Text != "" && fio_box.Text != "")
+            string b = login_box.Text;
+            try
             {
-                users users = new users
+                int a = Convert.ToInt32(type_box.Text);
+                var user = db.users.FirstOrDefault(x => x.login == login_box.Text && x.password == pass_box.Text && x.FIO == fio_box.Text && x.type == a);
+                if (login_box.Text != "" && pass_box.Text != "" && fio_box.Text != "")
                 {
-                    login = login_box.Text,
-                    password = pass_box.Text,
-                    FIO = fio_box.Text,
-                    type = a
-                };
-                db.users.Add(users);
-                regusers.Add(user);
-                db.SaveChanges();
-                MessageBox.Show("Пользователь добавлен");
+                    users users = new users
+                    {
+                        login = login_box.Text,
+                        password = pass_box.Text,
+                        FIO = fio_box.Text,
+                        type = a
+                    };
+                    db.users.Add(users);
+                    regusers.Add(user);
+                    db.SaveChanges();
+                    MessageBox.Show("Пользователь добавлен");
+                }
             }
-            
+            catch (FormatException ex)
+            {
+                if(b.Contains("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Проверьте корректность ввода поля: Логин");
+                }
+            }
         }
+
+        
     }
 }

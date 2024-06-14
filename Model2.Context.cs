@@ -13,10 +13,10 @@ namespace WpfApp1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class trenyaEntities5 : DbContext
+    public partial class listviewEntities2 : DbContext
     {
-        public trenyaEntities5()
-            : base("name=trenyaEntities5")
+        public listviewEntities2()
+            : base("name=listviewEntities2")
         {
         }
     
@@ -25,8 +25,7 @@ namespace WpfApp1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<fio> fio { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        //public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<Table_1> Table_1 { get; set; }
     }
 }
