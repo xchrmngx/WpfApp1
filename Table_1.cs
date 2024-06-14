@@ -12,12 +12,11 @@ namespace WpfApp1
     using System;
     using System.Collections.Generic;
     
-    public partial class users
+    public partial class Table_1
     {
         public int id { get; set; }
-        public Nullable<int> type { get; set; }
-        public string FIO { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public string text { get; set; }
+        public string imya { get; set; }
+        public string image { get; set; }
     }
 }
